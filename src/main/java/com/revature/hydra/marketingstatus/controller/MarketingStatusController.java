@@ -54,17 +54,43 @@ public class MarketingStatusController {
 		return new ResponseEntity<>(marketingStatusService.findAllStatus(), HttpStatus.OK);
     }
 	
+	/**
+	 * Retrieves one Marketing Status by name
+	 * @param name
+	 * @return ResponseEntity<MarketingStatus>
+	 */
 	@RequestMapping(value = "/one/marketingstatus/{name}", method = RequestMethod.GET)
     public ResponseEntity<MarketingStatus> getOneMarketingStatus(@PathVariable String name) {
 		return new ResponseEntity<>(marketingStatusService.findOneByMarketingStatus(name), HttpStatus.OK);
     }
 	
+	/**
+	 * Add a marketing status by name
+	 * @param marketingStatusName
+	 * @return ResponseEntity<Void>
+	 */
 	@RequestMapping(value = "/add/marketingstatus", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> addMarketingStatus(@RequestBody String marketingStatusName) {
 		marketingStatusService.addMarketingStatus(marketingStatusName);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	/**
+	 * Update an existing marketing status
+	 * @param marketingStatus
+	 * @return ResponseEntity<Void>
+	 */
+	@RequestMapping(value = "/update/marketingstatus", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> updateMarketingStatus(@RequestBody MarketingStatus marketingStatus) {
+		marketingStatusService.updateMarketingStatus(marketingStatus);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	/**
+	 * Delete a marketing status by id
+	 * @param id
+	 * @return ResponseEntity<Void>
+	 */
 	@RequestMapping(value = "/delete/marketingstatus/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteMarketingStatus(@PathVariable Integer id) {
 		marketingStatusService.deleteMarketingStatusById(id);
