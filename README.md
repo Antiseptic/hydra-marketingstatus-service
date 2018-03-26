@@ -1,6 +1,8 @@
 #hydra-marketingstatus-service
 Fields in the MarketingStatus beans are as follows:
 * MarketingStatus
+	* Integer marketingStatusId
+	* String marketingStatusName
 
 The controller can perform the following functions:
 * MarketingStatusController
