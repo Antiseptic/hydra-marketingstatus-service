@@ -82,7 +82,7 @@ public class MarketingStatusController {
 	@RequestMapping(value = "/add/marketingstatus", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> addMarketingStatus(@RequestBody String marketingStatusName) {
 		marketingStatusService.addMarketingStatus(marketingStatusName);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	/**
