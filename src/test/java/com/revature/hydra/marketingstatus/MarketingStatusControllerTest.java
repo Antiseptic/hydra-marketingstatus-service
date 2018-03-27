@@ -68,5 +68,8 @@ public class MarketingStatusControllerTest {
 					.andExpect(jsonPath("$.marketingStatusId", is(this.testMs.getMarketingStatusId())))
 					.andExpect(jsonPath("$.marketingStatusName", is(this.testMs.getMarketingStatusName())));
 	}
+	
+	/*@Test
+	public void test2AllMs() throws Exception*/
 
 }
