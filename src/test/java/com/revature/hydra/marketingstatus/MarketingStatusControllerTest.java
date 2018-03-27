@@ -36,7 +36,7 @@ import com.revature.hydra.marketingstatus.application.MarketingStatusRepositoryS
 import com.revature.hydra.marketingstatus.data.MarketingStatusRepository;
 
 /**
- * 
+ * JUnit class to test the Controller endpoints
  * @author Omowumi
  *
  */

@@ -21,6 +21,11 @@ import com.revature.beans.MarketingStatus;
 import com.revature.hydra.marketingstatus.application.MarketingStatusRepositoryServiceApplication;
 import com.revature.hydra.marketingstatus.data.MarketingStatusRepository;
 
+/**
+ * JUnit class to test the Repository methods
+ * @author Omowumi
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MarketingStatusRepositoryServiceApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
