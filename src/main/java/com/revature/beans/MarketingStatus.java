@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
  *
  */
 @Entity
-@Table(name = "CALIBER_MARKETING_STATUS")
+@Table(name = "TF_MARKETING_STATUS")
 public class MarketingStatus implements Serializable {
 	private static final long serialVersionUID = -2759772290434666909L;
 
