@@ -24,7 +24,7 @@ public class MarketingStatus implements Serializable {
 	@Id
 	@Column(name = "MARKETING_STATUS_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MARKETING_STATUS_ID_SEQUENCE")
-	@SequenceGenerator(name = "MARKETING_STATUS_ID_SEQUENCE", sequenceName = "MARKETING_STATUS_ID_SEQUENCE")
+	@SequenceGenerator(name = "MARKETING_STATUS_ID_SEQUENCE", sequenceName = "MARKETING_STATUS_ID_SEQUENCE", initialValue = 1000)
 	private Integer marketingStatusId;
 	
 	@NotNull
