@@ -40,6 +40,8 @@ public class MarketingStatusControllerTest {
 	@Autowired
 	private MarketingStatusRepository marketingStatusRepository;
 	
+	private final String mediaTypeJson = MediaType.APPLICATION_JSON_UTF8_VALUE;
+	
 	private MockMvc mockMvc;
 	
 	private MarketingStatus testMs;
@@ -60,16 +62,40 @@ public class MarketingStatusControllerTest {
 	}
 
 	@Test
-	public void test1OneMSById() throws Exception {
-		System.out.println("atest");
+	public void test1OneMsById() throws Exception {
 		this.mockMvc.perform(get("/one/marketingstatus/byid/" + this.testMs.getMarketingStatusId()))
 					.andExpect(status().isOk())
-					.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+					.andExpect(content().contentType(mediaTypeJson))
 					.andExpect(jsonPath("$.marketingStatusId", is(this.testMs.getMarketingStatusId())))
 					.andExpect(jsonPath("$.marketingStatusName", is(this.testMs.getMarketingStatusName())));
 	}
 	
-	/*@Test
-	public void test2AllMs() throws Exception*/
+	@Test
+	public void test2AllMs() throws Exception {
+		this.mockMvc.perform(get("/all/marketingstatus"))
+					.andExpect(status().isOk())
+					.andExpect(content().contentType(mediaTypeJson));
+	}
+	
+	@Test
+	public void test3AllMsMapped() throws Exception {
+		this.mockMvc.perform(get("/all/marketingstatus/mapped"))
+					.andExpect(status().isOk())
+					.andExpect(content().contentType(mediaTypeJson))
+					.andExpect(jsonPath("$.2.marketingStatusId", is(2)));
+	}
+	
+	@Test
+	public void test4OneMsByName() throws Exception {
+		this.mockMvc.perform(get("/one/marketingstatus/" + this.testMs.getMarketingStatusName()))
+					.andExpect(status().isOk())
+					.andExpect(content().contentType(mediaTypeJson))
+					.andExpect(jsonPath("$.marketingStatusId", is(this.testMs.getMarketingStatusId())));
+	}
+	
+	@Test
+	public void test5AddMs() throws Exception {
+		
+	}
 
 }

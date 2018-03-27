@@ -64,6 +64,11 @@ public class MarketingStatusController {
 		return new ResponseEntity<>(marketingStatusService.findOneByMarketingStatus(name), HttpStatus.OK);
     }
 	
+	/**
+	 * Retrieves one Marketing Status by id
+	 * @param id
+	 * @return ResponseEntity<MarketingStatus>
+	 */
 	@RequestMapping(value = "/one/marketingstatus/byid/{id}", method = RequestMethod.GET)
 	public ResponseEntity<MarketingStatus> getOneMarketingStatusById(@PathVariable Integer id) {
 		return new ResponseEntity<>(marketingStatusService.findOneById(id), HttpStatus.OK);
