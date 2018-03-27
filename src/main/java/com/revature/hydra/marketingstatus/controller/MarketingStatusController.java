@@ -60,9 +60,14 @@ public class MarketingStatusController {
 	 * @return ResponseEntity<MarketingStatus>
 	 */
 	@RequestMapping(value = "/one/marketingstatus/{name}", method = RequestMethod.GET)
-    public ResponseEntity<MarketingStatus> getOneMarketingStatus(@PathVariable String name) {
+    public ResponseEntity<MarketingStatus> getOneMarketingStatusByName(@PathVariable String name) {
 		return new ResponseEntity<>(marketingStatusService.findOneByMarketingStatus(name), HttpStatus.OK);
     }
+	
+	@RequestMapping(value = "/one/marketingstatus/byid/{id}", method = RequestMethod.GET)
+	public ResponseEntity<MarketingStatus> getOneMarketingStatusById(@PathVariable Integer id) {
+		return new ResponseEntity<>(marketingStatusService.findOneById(id), HttpStatus.OK);
+	}
 	
 	/**
 	 * Add a marketing status by name

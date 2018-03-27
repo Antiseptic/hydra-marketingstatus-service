@@ -43,6 +43,10 @@ public class MarketingStatusService {
 		return createMapping(lms);
 	}
 	
+	public MarketingStatus findOneById(Integer id) {
+		return marketingStatusRepository.findOne(id);
+	}
+	
 	/**
 	 * Get a single MarketingStatus object
 	 * @param marketingStatusName
