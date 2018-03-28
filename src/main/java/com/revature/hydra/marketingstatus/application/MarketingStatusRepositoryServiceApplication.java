@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 
 @EnableJpaRepositories("com.revature.hydra.marketingstatus.data")
 @EntityScan("com.revature.beans")
-@Controller
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.revature.hydra.marketingstatus.controller", "com.revature.hydra.marketingstatus.service"})
 public class MarketingStatusRepositoryServiceApplication {
