@@ -36,7 +36,7 @@ import com.revature.hydra.marketingstatus.application.MarketingStatusRepositoryS
 import com.revature.hydra.marketingstatus.data.MarketingStatusRepository;
 
 /**
- * JUnit class to test the Controller endpoints
+ * JUnit class to test the Controller endpoints using Spring MVC Testing Framework
  * @author Omowumi
  *
  */
@@ -71,6 +71,10 @@ public class MarketingStatusControllerTest {
 	private MarketingStatus testMs;
 	private MarketingStatus addMs;
 	
+	/**
+	 * Create a test marketing status in table to test on
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -78,14 +82,22 @@ public class MarketingStatusControllerTest {
 		this.testMs = this.marketingStatusRepository.save(this.testMs);
 	}
 
+	/**
+	 * Remove test marketing status so that it doesn't cause problems with repeated runs 
+	 * of the test and isn't left in database for production
+	 */
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		int testId = this.testMs.getMarketingStatusId();
 		if (marketingStatusRepository.findOne(testId) != null) {
 			marketingStatusRepository.delete(testId);
 		}
 	}
 
+	/**
+	 * Test receiving on marketing status by id
+	 * @throws Exception
+	 */
 	@Test
 	public void test1OneMsById() throws Exception {
 		this.mockMvc.perform(get("/one/marketingstatus/byid/" + this.testMs.getMarketingStatusId()))
@@ -95,6 +107,10 @@ public class MarketingStatusControllerTest {
 					.andExpect(jsonPath("$.marketingStatusName", is(this.testMs.getMarketingStatusName())));
 	}
 	
+	/**
+	 * Test receiving all marketing status'
+	 * @throws Exception
+	 */
 	@Test
 	public void test2AllMs() throws Exception {
 		this.mockMvc.perform(get("/all/marketingstatus"))
@@ -102,6 +118,10 @@ public class MarketingStatusControllerTest {
 					.andExpect(content().contentType(mediaTypeJson));
 	}
 	
+	/**
+	 * Test receiving all marketing status's in a map that can be accessed by id
+	 * @throws Exception
+	 */
 	@Test
 	public void test3AllMsMapped() throws Exception {
 		this.mockMvc.perform(get("/all/marketingstatus/mapped"))
@@ -110,6 +130,10 @@ public class MarketingStatusControllerTest {
 					.andExpect(jsonPath("$.2.marketingStatusId", is(2)));
 	}
 	
+	/**
+	 * Test receiving a marketing status by name
+	 * @throws Exception
+	 */
 	@Test
 	public void test4OneMsByName() throws Exception {
 		this.mockMvc.perform(get("/one/marketingstatus/" + this.testMs.getMarketingStatusName()))
@@ -118,6 +142,10 @@ public class MarketingStatusControllerTest {
 					.andExpect(jsonPath("$.marketingStatusId", is(this.testMs.getMarketingStatusId())));
 	}
 	
+	/**
+	 * Test adding a marketing status to the database
+	 * @throws Exception
+	 */
 	@Test
 	public void test5AddMs() throws Exception {
 		this.addMs = new MarketingStatus();
@@ -128,6 +156,10 @@ public class MarketingStatusControllerTest {
 					.andExpect(status().isCreated());
 	}
 	
+	/**
+	 * Testing updating a marketing status' name
+	 * @throws Exception
+	 */
 	@Test
 	public void test6UpdateMs() throws Exception {
 		this.testMs = this.marketingStatusRepository.findOne(this.testMs.getMarketingStatusId());
@@ -138,12 +170,22 @@ public class MarketingStatusControllerTest {
 					.andExpect(status().isOk());
 	}
 	
+	/**
+	 * Test deleting a marketing status
+	 * @throws Exception
+	 */
 	@Test
 	public void test7DeleteMs() throws Exception {
 		this.mockMvc.perform(delete("/delete/marketingstatus/" + this.testMs.getMarketingStatusId()))
 					.andExpect(status().isOk());
 	}
 	
+	/**
+	 * Used to convert a java object into a json
+	 * @param obj
+	 * @return
+	 * @throws IOException
+	 */
 	protected String json(Object obj) throws IOException {
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
 		this.mappingJackson2HttpMessageConverter.write(obj, MediaType.APPLICATION_JSON, mockHttpOutputMessage);

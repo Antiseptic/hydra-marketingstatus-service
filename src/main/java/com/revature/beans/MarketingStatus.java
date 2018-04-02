@@ -21,12 +21,18 @@ import javax.validation.constraints.NotNull;
 public class MarketingStatus implements Serializable {
 	private static final long serialVersionUID = -2759772290434666909L;
 
+	/**
+	 * Primary key Id for a marketing status
+	 */
 	@Id
 	@Column(name = "MARKETING_STATUS_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MARKETING_STATUS_ID_SEQUENCE")
 	@SequenceGenerator(name = "MARKETING_STATUS_ID_SEQUENCE", sequenceName = "MARKETING_STATUS_ID_SEQUENCE", initialValue = 1000)
 	private Integer marketingStatusId;
 	
+	/**
+	 * Name of the marketing status
+	 */
 	@NotNull
 	@Column(name = "MARKETING_STATUS_NAME")
 	private String marketingStatusName;
@@ -90,9 +96,4 @@ public class MarketingStatus implements Serializable {
 		return "MarketingStatus [marketingStatusId=" + marketingStatusId + ", marketingStatusName="
 				+ marketingStatusName + "]";
 	}
-
-	
-	
-	
-	
 }

@@ -7,6 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
 
+/**
+ * To start spring boot application
+ * @author Omowumi
+ *
+ */
 @EnableJpaRepositories("com.revature.hydra.marketingstatus.data")
 @EntityScan("com.revature.beans")
 @EnableAutoConfiguration
