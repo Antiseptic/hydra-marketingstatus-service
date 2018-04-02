@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -45,6 +46,7 @@ import com.revature.hydra.marketingstatus.data.MarketingStatusRepository;
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MarketingStatusControllerTest {
+	private static final Logger log = Logger.getLogger(MarketingStatusControllerTest.class);
 	
 	@Autowired
     private WebApplicationContext webApplicationContext;
@@ -77,6 +79,7 @@ public class MarketingStatusControllerTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		log.info("setUp: ");
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		this.testMs = new MarketingStatus(0, "TEST STATUS");
 		this.testMs = this.marketingStatusRepository.save(this.testMs);
@@ -88,6 +91,7 @@ public class MarketingStatusControllerTest {
 	 */
 	@After
 	public void tearDown() {
+		log.info("tearDown: ");
 		int testId = this.testMs.getMarketingStatusId();
 		if (marketingStatusRepository.findOne(testId) != null) {
 			marketingStatusRepository.delete(testId);
@@ -100,6 +104,7 @@ public class MarketingStatusControllerTest {
 	 */
 	@Test
 	public void test1OneMsById() throws Exception {
+		log.info("test1OneMsById: ");
 		this.mockMvc.perform(get("/one/marketingstatus/byid/" + this.testMs.getMarketingStatusId()))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(mediaTypeJson))
@@ -113,6 +118,7 @@ public class MarketingStatusControllerTest {
 	 */
 	@Test
 	public void test2AllMs() throws Exception {
+		log.info("test2AllMs: ");
 		this.mockMvc.perform(get("/all/marketingstatus"))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(mediaTypeJson));
@@ -124,6 +130,7 @@ public class MarketingStatusControllerTest {
 	 */
 	@Test
 	public void test3AllMsMapped() throws Exception {
+		log.info("test3AllMsMapped: ");
 		this.mockMvc.perform(get("/all/marketingstatus/mapped"))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(mediaTypeJson))
@@ -136,6 +143,7 @@ public class MarketingStatusControllerTest {
 	 */
 	@Test
 	public void test4OneMsByName() throws Exception {
+		log.info("test4OneMsByName: ");
 		this.mockMvc.perform(get("/one/marketingstatus/" + this.testMs.getMarketingStatusName()))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(mediaTypeJson))
@@ -148,6 +156,7 @@ public class MarketingStatusControllerTest {
 	 */
 	@Test
 	public void test5AddMs() throws Exception {
+		log.info("test5AddMs: ");
 		this.addMs = new MarketingStatus();
 		this.addMs.setMarketingStatusName("ADDTESTMS");
 		this.mockMvc.perform(post("/add/marketingstatus")
@@ -162,6 +171,7 @@ public class MarketingStatusControllerTest {
 	 */
 	@Test
 	public void test6UpdateMs() throws Exception {
+		log.info("test6UpdateMs: ");
 		this.testMs = this.marketingStatusRepository.findOne(this.testMs.getMarketingStatusId());
 		this.testMs.setMarketingStatusName("UPDATETESTMS");
 		this.mockMvc.perform(put("/update/marketingstatus")
@@ -176,6 +186,7 @@ public class MarketingStatusControllerTest {
 	 */
 	@Test
 	public void test7DeleteMs() throws Exception {
+		log.info("test7DeleteMs: ");
 		this.mockMvc.perform(delete("/delete/marketingstatus/" + this.testMs.getMarketingStatusId()))
 					.andExpect(status().isOk());
 	}
@@ -187,6 +198,7 @@ public class MarketingStatusControllerTest {
 	 * @throws IOException
 	 */
 	protected String json(Object obj) throws IOException {
+		log.info("json: ");
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
 		this.mappingJackson2HttpMessageConverter.write(obj, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
 		return mockHttpOutputMessage.getBodyAsString();
